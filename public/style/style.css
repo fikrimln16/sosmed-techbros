@@ -1,0 +1,13 @@
+.main {
+    min-width: 160px;
+    max-width: 640px;
+}
+
+textarea::-webkit-scrollbar {
+    width: 0px;
+}
+
+.count {
+    border-right: 2px solid black;
+    opacity: 50%;
+}
