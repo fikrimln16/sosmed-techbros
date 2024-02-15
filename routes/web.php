@@ -9,12 +9,15 @@ use Illuminate\Routing\Router;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
+Route::middleware('throttle:only_three_visits')->group(function (){
+   Route::post('/posts', [DashboardController::class, 'store'])->name('textarea-post.form');
+   Route::post('/comment/{post}', [CommentController::class, 'comment'])->name('comment-post'); 
+});
+
 Route::get('/posts', [DashboardController::class, 'index'])->name('dashboard');
-Route::post('/posts', [DashboardController::class, 'store'])->name('textarea-post.form');
 Route::get('/posts/{post}', [DashboardController::class, 'show'])->name('show-post');
 Route::post('/like/{id}', [DashboardController::class, 'like'])->name('like-post');
 
-Route::post('/comment/{post}', [CommentController::class, 'comment'])->name('comment-post');
 
 Route::get('/register', [AuthController::class, 'show_register'])->name('register-page');
 Route::post('/register', [AuthController::class, 'store_register'])->name('store-register');
