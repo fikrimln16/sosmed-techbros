@@ -15,12 +15,27 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $datas = Post::with('comments')->orderByDesc('created_at')->paginate(5);
+        $datas = Post::with('comments')->orderByDesc('likes')->paginate(5);
     
         return view('pages.dashboard', [
             'datas' => $datas
         ]);
     }
+
+    public function sortByLike()
+    {
+        $datas = Post::with('comments')->orderByDesc('likes')->paginate(5);
+
+        return view('pages.dashboard', compact('datas'));
+    }
+
+    public function sortByNewest()
+    {
+        $datas = Post::with('comments')->orderByDesc('created_at')->paginate(5);
+
+        return view('pages.dashboard', compact('datas'));
+    }
+
 
     public function show(Post $post){
         
