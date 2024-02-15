@@ -7,6 +7,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Router;
 
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
 Route::get('/posts', [DashboardController::class, 'index'])->name('dashboard');
 Route::post('/posts', [DashboardController::class, 'store'])->name('textarea-post.form');
 Route::get('/posts/{post}', [DashboardController::class, 'show'])->name('show-post');
