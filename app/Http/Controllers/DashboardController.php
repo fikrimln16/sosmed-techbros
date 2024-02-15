@@ -40,14 +40,15 @@ class DashboardController extends Controller
 
             $post = new Post();
             $post->body = $validatedData['body'];
-            $post->user_id = auth()->id(); // Menggunakan auth()->id() untuk mendapatkan ID user
+            $post->user_id = auth()->id();
             $post->save();
 
             return redirect()->route('dashboard')->with('success', 'Post created!');
-        } catch (ThrottleRequestsException $e) {
-            return redirect()->route('dashboard')->with('success', 'Post creation rate limit exceeded. Please try again later.');
+        } catch (\Illuminate\Http\Exceptions\ThrottleRequestsException $e) {
+            return redirect()->route('dashboard')->with('error', 'You have reached the maximum post limit. Please try again later.');
         }
     }
+
 
     public function like($id){
         $datas = Post::find($id);

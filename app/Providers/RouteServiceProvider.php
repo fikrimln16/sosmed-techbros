@@ -28,8 +28,10 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
 
-        RateLimiter::for('only_three_visits', function (Request $request){
-            return Limit::perMinute(3);
+        RateLimiter::for('only_ten_visits', function (Request $request){
+            return Limit::perMinute(10)->by(auth()->id())->response(function () {
+                return redirect()->route('dashboard')->with('failed', 'Server sedang terlalu banyak request, coba lagi dalam 1 menit!');
+            });
         });
 
         $this->routes(function () {

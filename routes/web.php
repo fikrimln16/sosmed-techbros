@@ -9,7 +9,7 @@ use Illuminate\Routing\Router;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::middleware('throttle:only_three_visits')->group(function (){
+Route::middleware('throttle:only_ten_visits')->group(function (){
    Route::post('/posts', [DashboardController::class, 'store'])->name('textarea-post.form');
    Route::post('/comment/{post}', [CommentController::class, 'comment'])->name('comment-post'); 
 });

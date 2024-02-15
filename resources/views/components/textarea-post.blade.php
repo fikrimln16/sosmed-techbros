@@ -9,5 +9,8 @@
          <button type='submit' class="btn btn-dark" id="postSubmitButton"> Share </button>
          <span class="countCharPost" id="postCharCounter"> 480 </span>
       </div>
+      @if(session('error'))
+         <span class="text-danger">{{ session('error') }}</span>
+      @endif
    </div>
 </form>
