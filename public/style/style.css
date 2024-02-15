@@ -11,3 +11,10 @@ textarea::-webkit-scrollbar {
     border-right: 2px solid black;
     opacity: 50%;
 }
+
+.text-limit {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; /* Sesuaikan dengan lebar yang diinginkan */
+}

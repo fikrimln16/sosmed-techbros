@@ -50,7 +50,14 @@ class DashboardController extends Controller
             $user = auth()->user();
 
             $validatedData = $request->validate([
-                'body' => 'required|string|max:480'
+                'body' => ['required', 'string', 'max:480', function ($attribute, $value, $fail) {
+                    $words = explode(' ', $value);
+                    foreach ($words as $word) {
+                        if (strlen($word) > 30) {
+                            $fail("The word '$word' exceeds the maximum length of 100 characters.");
+                        }
+                    }
+                }],
             ]);
 
             $post = new Post();

@@ -4,6 +4,9 @@
       <div class="mb-3">
          <textarea id="postTextArea" class="form-control" id="body" name='body' rows="3"
             style="resize: none;"></textarea>
+         @error('body')
+            <span class="d-block fs-6 text-danger mt-2"> {{ $message }}</span>
+         @enderror
       </div>
       <div class=" d-flex align-items-center gap-2">
          <button type='submit' class="btn btn-dark" id="postSubmitButton"> Share </button>

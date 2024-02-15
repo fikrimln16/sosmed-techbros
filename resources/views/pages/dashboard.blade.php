@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('container')
-<div class="col col-md-12 col-sm-12 main">
+<div class="col col-md-12 col-sm-12">
    @include('components.alert')
    
    <!--Post Text Area Start-->
