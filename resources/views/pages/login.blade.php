@@ -1,8 +1,8 @@
 @extends('layout.layout')
 
 @section('container')
-<div class="container">
-  <div class="row justify-content-center align-items-center mt-4">
+{{-- <div class="container"> --}}
+  {{-- <div class="row justify-content-center align-items-center mt-4">
       <div class="col-md-6">
           <div class="card col-12">
               <div class="card-body">
@@ -41,21 +41,21 @@
           </div>
       </div>
   </div>
-</div>
-{{-- <div class="container py-5 h-100">
+</div> --}}
+<div class="container py-5 h-100">
   <div class="row d-flex justify-content-center align-items-center h-100">
     <div class="col-12 col-md-8 col-lg-6 col-xl-5">
       <form action="">
         <div class="card p-5 text-center">
           <h3 class="mb-5">Sign in</h3>
-          <p>Untuk menggunakan web ini, anda dapat login menggunakan Google!</p>
+          <p>Untuk menggunakan web ini, anda dapat login menggunakan Github!</p>
           <hr class="my-4">
-          <a href="{{ route('redirect-google') }}" class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;">
-            <i class="fab fa-google me-2"></i> Sign in with Google
+          <a href="{{ route('redirect-github') }}" class="btn btn-lg btn-block btn-secondary">
+            <i class='bx bxl-github'></i> Sign in with Github
           </a>
         </div>
       </form>
     </div>
   </div>
-</div> --}}
+</div>
 @endsection

@@ -55,26 +55,27 @@ class AuthController extends Controller
         ]);
     }
 
-    public function redirectToGoogle()
+    public function redirect()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('github')->redirect();
     }
 
-    public function handleGoogleCallback()
+    public function handleCallback()
     {
-        $googleUser = Socialite::driver('google')->user();
-
+        $githubUser = Socialite::driver('github')->user();
+        // dd($githubUser);
         // Cek apakah pengguna sudah terdaftar dalam database
-        $user = User::where('google_id', $googleUser->id)->first();
-        // dd($googleUser);
+        $user = User::where('email', $githubUser->email)->first();
+        // dd($githubUser);
 
         // Jika belum, tambahkan pengguna ke dalam database
         if (!$user) {
             $user = new User();
-            $user->google_id = $googleUser->getId();
-            $user->name = $googleUser->getName();
-            $user->email = $googleUser->getEmail();
-            $user->avatar = $googleUser->getAvatar();
+            $user->provider_id = $githubUser->id;
+            $user->nickname = $githubUser->nickname;
+            $user->name = $githubUser->name;
+            $user->email = $githubUser->email;
+            $user->avatar = $githubUser->avatar;
             $user->email_verified_at = now(); // Sesuaikan dengan cara verifikasi email di aplikasi Anda
             $user->password = ''; // Jika menggunakan OAuth, password tidak digunakan
             $user->save();

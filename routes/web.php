@@ -22,13 +22,17 @@ Route::get('/posts/sort-by-newest', [DashboardController::class, 'sortByNewest']
 Route::get('/posts/{post}', [DashboardController::class, 'show'])->name('show-post');
 Route::post('/like/{id}', [DashboardController::class, 'like'])->name('like-post');
 
-
+#Register Login
 Route::get('/register', [AuthController::class, 'show_register'])->name('register-page');
 Route::post('/register', [AuthController::class, 'store_register'])->name('store-register');
 Route::get('/login', [AuthController::class, 'show'])->name('login-page');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('redirect-google');
-Route::get('/login/auth/google/callback', [AuthController::class, 'handleGoogleCallback'])->name('google-callback');
+
+#OAuth
+Route::get('/auth/github', [AuthController::class, 'redirect'])->name('redirect-github');
+Route::get('/auth/github/callback', [AuthController::class, 'handleCallback'])->name('github-callback');
+
+#Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/profile/{id}', [ProfileController::class, 'profile'])->name('profile-page');
