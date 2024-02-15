@@ -15,11 +15,17 @@
                       <div class="mb-3">
                           <label for="email" class="form-label">Email</label>
                           <input type="email" id="email" name="email" class="form-control" required autofocus>
+                          @error('email')
+                               <span class="d-block fs-6 text-danger mt-2"> {{ $message }}</span>
+                           @enderror
                       </div>
 
                       <div class="mb-3">
                           <label for="password" class="form-label">Password</label>
                           <input type="password" id="password" name="password" class="form-control" required>
+                          @error('password')
+                               <span class="d-block fs-6 text-danger mt-2"> {{ $message }}</span>
+                           @enderror
                       </div>
 
                       <div class="mb-3 form-check">
