@@ -4,7 +4,7 @@
          <div class="d-flex align-items-center justify-content-between w-100">
             <div class="profile d-flex align-items-center w-100">
                <a href="/profile/{{$data->user->id}}">
-                  <img style="width: 50px" class="me-2 avatar-sm rounded-circle border border-black"
+                  <img style="width: 50px" class="me-2 avatar-sm rounded-circle  "
                      src="{{ $data->user->avatar }}" alt="Mario Avatar" /></a>
                <div>
                   <h5 class="card-title mb-0 w-100">
@@ -24,14 +24,11 @@
    <div class="card-body">
       <p class="fs-6 text-muted overflow-hidden" style="max-width: 100%;">{{ $data->body }}</p>
       <div class="d-flex justify-content-between">
-          <div class="d-flex gap-2">
-            <form id="likeForm" action="{{ route('like-post', ['id' => $data->id]) }}" method="post">
-                @csrf
-                <button type="button" class="btn btn-link fw-light nav-link fs-6" id="likeButton">
-                    <i class='bx bxs-up-arrow-circle fs-6'></i> <span id="likeCount">{{ $data->likes }}</span>
-                </button>
-            </form>            
-            <a href="#" class="fw-light nav-link fs-6">
+          <div class="d-flex gap-2   d-flex align-items-center">
+            <button type="button" class="like-button btn btn-link fw-light nav-link fs-6   d-flex align-items-center" data-post-id="{{ $data->id }}">
+              <i class='bx bxs-up-arrow-circle fs-6'></i><span class="like-count mx-1" id="likeCount-{{ $data->id }}">{{ $data->likes }}</span>
+            </button>     
+            <a href="#" class="fw-light nav-link fs-6   d-flex align-items-center">
                 <i class="bx bxs-comment"></i> {{ $data->comments->count() }}
             </a>
           </div>

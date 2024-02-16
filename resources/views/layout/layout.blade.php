@@ -30,23 +30,34 @@
    <script src="js/script.js"></script>
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script>
       $(document).ready(function() {
-          $('#likeButton').click(function() {
-              $.ajax({
-                  url: $('#likeForm').attr('action'),
-                  type: 'POST',
-                  data: $('#likeForm').serialize(),
-                  success: function(response) {
-                      $('#likeCount').text(response.likes);
-                  },
-                  error: function(xhr, status, error) {
-                      console.error(xhr.responseText);
-                  }
-              });
-          });
-      });
+    $('.like-button').click(function() {
+        var postId = $(this).data('post-id');
+        var likeCount = $('#likeCount-' + postId);
+
+        $.ajax({
+            type: 'POST',
+            url: '{{ route("like-post", ["id" => ":id"]) }}'.replace(':id', postId),
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                var currentLikes = parseInt(likeCount.text());
+                likeCount.text(currentLikes + 1);
+                $(this).text('Like (' + (currentLikes + 1) + ')');
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
+
+
   </script>
+
 </body>
 
 </html>

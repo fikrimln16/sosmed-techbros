@@ -27,12 +27,9 @@
       </p>
       <div class="d-flex justify-content-between">
          <div class="d-flex gap-2">
-            <form action="{{ route('like-post', ['id' => $data->id]) }}" method="post">
-               @csrf
-               <button type="submit" name='id' class="btn btn-link fw-light nav-link fs-6">
-                  <span class="fas fa-heart me-1"></span> {{ $data->likes }}
-               </button>
-            </form>
+            <button class="btn btn-link fw-light nav-link fs-6 like-button" data-post-id="{{ $data->id }}">
+               <i class='bx bxs-up-arrow-circle fs-6'></i> <span id="likeCount">{{ $data->likes }}</span>
+           </button>
             <a href=" #" class="fw-light nav-link fs-6">
                <i class="bx bxs-comment"></i> {{ $data->comments->count() }}
             </a>
