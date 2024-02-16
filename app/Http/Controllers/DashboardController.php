@@ -72,18 +72,22 @@ class DashboardController extends Controller
     }
 
 
-    public function like($id){
-        $datas = Post::find($id);
-        // dd($datas->likes);
-        if ($datas){
-            $like_num = $datas->likes;
-            $updated_like = $like_num + 1;
-            
-            $datas->update(['likes' => $updated_like]);
-            
-            return redirect()->route('dashboard');
+    public function like(Request $request, $id)
+    {
+        $post = Post::find($id);
+
+        if (!$post) {
+            return response()->json(['error' => 'Post not found'], 404);
         }
+
+        $like_num = $post->likes;
+        $updated_like = $like_num + 1;
+
+        $post->update(['likes' => $updated_like]);
+
+        return response()->json(['likes' => $updated_like]);
     }
+
 
     public function show_comments(){
         

@@ -25,15 +25,15 @@
       <p class="fs-6 text-muted overflow-hidden" style="max-width: 100%;">{{ $data->body }}</p>
       <div class="d-flex justify-content-between">
           <div class="d-flex gap-2">
-              <form action="{{ route('like-post', ['id' => $data->id]) }}" method="post">
-                  @csrf
-                  <button type="submit" name='id' class="btn btn-link fw-light nav-link fs-6">
-                      <i class='bx bxs-up-arrow-circle fs-6'></i> {{ $data->likes }}
-                  </button>
-              </form>
-              <a href="#" class="fw-light nav-link fs-6">
-                  <i class="bx bxs-comment"></i> {{ $data->comments->count() }}
-              </a>
+            <form id="likeForm" action="{{ route('like-post', ['id' => $data->id]) }}" method="post">
+                @csrf
+                <button type="button" class="btn btn-link fw-light nav-link fs-6" id="likeButton">
+                    <i class='bx bxs-up-arrow-circle fs-6'></i> <span id="likeCount">{{ $data->likes }}</span>
+                </button>
+            </form>            
+            <a href="#" class="fw-light nav-link fs-6">
+                <i class="bx bxs-comment"></i> {{ $data->comments->count() }}
+            </a>
           </div>
           <div>
               <a href="{{ route('show-post', $data->id) }}" class="text-decoration-none cursor-pointer">view post...</a>
