@@ -2,18 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+Route::get('/posts', [DashboardController::class, 'api_index']);
+Route::get('/posts/sort-by-like', [DashboardController::class, 'api_sortByLike'])->name('sort-by-like');
+Route::get('/posts/sort-by-newest', [DashboardController::class, 'api_sortByNewest'])->name('sort-by-newest');
+Route::get('/posts/{post}', [DashboardController::class, 'api_show'])->name('show-post');
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/profile/{id}', [ProfileController::class, 'api_profile'])->name('profile-page');

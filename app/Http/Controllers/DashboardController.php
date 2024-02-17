@@ -22,11 +22,27 @@ class DashboardController extends Controller
         ]);
     }
 
+    #api
+    public function api_index(){
+        $datas = Post::with('comments')->orderByDesc('likes')->get();
+    
+        return $datas;
+    }
+    
+
     public function sortByLike()
     {
         $datas = Post::with('comments')->orderByDesc('likes')->paginate(5);
 
         return view('pages.dashboard', compact('datas'));
+    }
+
+    #api
+    public function api_sortByLike()
+    {
+        $datas = Post::with('comments')->orderByDesc('likes')->get();
+
+        return $datas;
     }
 
     public function sortByNewest()
@@ -36,12 +52,25 @@ class DashboardController extends Controller
         return view('pages.dashboard', compact('datas'));
     }
 
+    public function api_sortByNewest()
+    {
+        $datas = Post::with('comments')->orderByDesc('created_at')->get();
+
+        return $datas;
+    }
+
 
     public function show(Post $post){
         
         return view('pages.post',[
             'data' => $post
         ]);
+    }
+
+    #api
+    public function api_show(Post $post){
+        
+        return $post;
     }
 
     public function store(Request $request)
