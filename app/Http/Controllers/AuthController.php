@@ -63,7 +63,7 @@ class AuthController extends Controller
     public function handleCallback()
     {
         $githubUser = Socialite::driver('github')->user();
-        dd($githubUser);
+        // dd($githubUser);
         // Cek apakah pengguna sudah terdaftar dalam database
         $user = User::where('email', $githubUser->email)->first();
         // dd($githubUser);

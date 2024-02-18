@@ -10,7 +10,9 @@ Route::middleware('auth:sanctum')->group(function () {
    Route::post('/posts', [ApiPostController::class, 'store']);
    Route::get('/posts/sort-by-newest', [ApiPostController::class, 'sortByNewest']);
    Route::get('/posts/sort-by-likes', [ApiPostController::class, 'sortByLikes']);
-   // Route::get('/posts/{post}', [ApiUserController::class, 'api_show'])->name('show-post');
+   Route::get('/posts/{post}', [ApiPostController::class, 'show']);
+   Route::delete('/posts/{post}', [ApiPostController::class, 'destroy']);
+   Route::put('/posts/{id}', [ApiPostController::class, 'update']);
    // Route::get('/profile/{id}', [ProfileController::class, 'api_profile'])->name('profile-page');
 });
 
