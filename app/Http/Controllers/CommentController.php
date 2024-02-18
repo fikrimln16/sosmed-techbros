@@ -22,4 +22,20 @@ class CommentController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Berhasil menambahkan komentar!');
     }
+
+    public function reply(Request $request, Comment $comment)
+    {
+        // Validasi request jika diperlukan
+
+        // Buat komentar balasan baru
+        $reply = new Comment();
+        $reply->user_id = auth()->id(); // Atau sesuaikan dengan cara Anda mendapatkan user ID
+        $reply->post_id = $comment->post_id;
+        $reply->body = $request->body;
+        $reply->parent_comment_id = $comment->id;
+        $reply->save();
+
+        // Redirect atau berikan respons sesuai kebutuhan
+        return redirect()->back()->with('success', 'Reply berhasil ditambahkan');
+    }
 }

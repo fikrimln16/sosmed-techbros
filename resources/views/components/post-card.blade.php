@@ -38,7 +38,7 @@
       </div>
       <div>
           @auth
-          <form action="{{ route('comment-post', $data->id) }}" method="post">
+          <form id="commentForm" action="{{ route('comment-post', $data->id) }}" method="post">
               @csrf
               <div class="mb-3">
                   <textarea name='body' id="commentTextarea" class="fs-6 form-control" style="resize: none" rows="2"

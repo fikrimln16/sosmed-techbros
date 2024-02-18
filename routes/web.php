@@ -7,14 +7,15 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Router;
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/', [DashboardController::class, 'sortByNewest'])->name('dashboard');
 
 Route::middleware('throttle:only_ten_visits')->group(function (){
    Route::post('/posts', [DashboardController::class, 'store'])->name('textarea-post.form');
    Route::post('/comment/{post}', [CommentController::class, 'comment'])->name('comment-post'); 
+   Route::post('/comment/reply/{comment}', [CommentController::class, 'reply'])->name('reply'); 
 });
 
-Route::get('/posts', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/posts', [DashboardController::class, 'sortByNewest'])->name('dashboard');
 Route::get('/posts/sort-by-like', [DashboardController::class, 'sortByLike'])->name('sort-by-like');
 Route::get('/posts/sort-by-newest', [DashboardController::class, 'sortByNewest'])->name('sort-by-newest');
 Route::get('/posts/{post}', [DashboardController::class, 'show'])->name('show-post');

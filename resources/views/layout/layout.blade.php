@@ -54,10 +54,29 @@
         });
     });
 });
-
-
   </script>
-
+{{-- 
+<script>
+    $(document).ready(function() {
+        $('#commentForm').on('submit', function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    alert("success")
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    // Tambahkan logika untuk menampilkan pesan atau melakukan aksi lain jika terjadi kesalahan
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script> --}}
 </body>
 
 </html>
