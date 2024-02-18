@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 
-
 class DashboardController extends Controller
 {
     public function index()
@@ -22,25 +21,6 @@ class DashboardController extends Controller
         ]);
     }
 
-    /**
-     * @OA\Get(
-     *     path="/api/posts",
-     *     tags={"Posts"},
-     *     summary="Get Posts Todo Data",
-     *     description="Mengambil semua data posts untuk dashboard utama",
-     *     operationId="post",
-     *     @OA\Response(
-     *         response="default",
-     *         description="return array model todo"
-     *     )
-     * )
-     */
-    public function api_index(){
-        $datas = Post::with('comments')->orderByDesc('likes')->get();
-    
-        return $datas;
-    }
-    
 
     public function sortByLike()
     {
@@ -49,13 +29,6 @@ class DashboardController extends Controller
         return view('pages.dashboard', compact('datas'));
     }
 
-    #api
-    public function api_sortByLike()
-    {
-        $datas = Post::with('comments')->orderByDesc('likes')->get();
-
-        return $datas;
-    }
 
     public function sortByNewest()
     {
@@ -66,25 +39,11 @@ class DashboardController extends Controller
 
 
 
-    public function api_sortByNewest()
-    {
-        $datas = Post::with('comments')->orderByDesc('created_at')->get();
-
-        return $datas;
-    }
-
-
     public function show(Post $post){
         
         return view('pages.post',[
             'data' => $post
         ]);
-    }
-
-    #api
-    public function api_show(Post $post){
-        
-        return $post;
     }
 
     public function store(Request $request)
