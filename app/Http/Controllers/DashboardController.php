@@ -22,7 +22,19 @@ class DashboardController extends Controller
         ]);
     }
 
-    #api
+    /**
+     * @OA\Get(
+     *     path="/api/posts",
+     *     tags={"Posts"},
+     *     summary="Get Posts Todo Data",
+     *     description="Mengambil semua data posts untuk dashboard utama",
+     *     operationId="post",
+     *     @OA\Response(
+     *         response="default",
+     *         description="return array model todo"
+     *     )
+     * )
+     */
     public function api_index(){
         $datas = Post::with('comments')->orderByDesc('likes')->get();
     
@@ -51,6 +63,8 @@ class DashboardController extends Controller
 
         return view('pages.dashboard', compact('datas'));
     }
+
+
 
     public function api_sortByNewest()
     {

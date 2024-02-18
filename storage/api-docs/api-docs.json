@@ -1,0 +1,24 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Documentation My API",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/posts": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Get Posts Todo Data",
+                "description": "Mengambil semua data posts untuk dashboard utama",
+                "operationId": "post",
+                "responses": {
+                    "default": {
+                        "description": "return array model todo"
+                    }
+                }
+            }
+        }
+    }
+}
