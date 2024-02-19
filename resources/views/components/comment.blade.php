@@ -1,4 +1,3 @@
-<hr>
 @if($comment->parent_comment_id === null)
    <div class="d-flex align-items-start fs-4">
       <a href="/profile/{{ $comment->user->id }}">

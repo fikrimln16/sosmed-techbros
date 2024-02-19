@@ -64,6 +64,7 @@
                   <h4>No comments found</h4>
               </div>
           @else
+              <hr>
               @foreach($data->comments->take(3) as $comment)
                   @include('components.comment')
               @endforeach
