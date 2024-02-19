@@ -1,5 +1,5 @@
 @if($comment->parent_comment_id === null)
-   <div class="d-flex align-items-start fs-4">
+   <div class="d-flex align-items-start fs-4 mt-2">
       <a href="/profile/{{ $comment->user->id }}">
          <img style="width: 35px" class="me-2 avatar-sm rounded-circle border border-black"
             src="{{ $comment->user->avatar }}" alt="Luigi Avatar" />
