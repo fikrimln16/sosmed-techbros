@@ -20,7 +20,7 @@ class DashboardController extends Controller
         ->orderByDesc('likes')
         ->paginate(5);
 
-        // dd($datas);
+        dd($datas);
         return view('pages.dashboard', compact('datas'));
     }
 
@@ -36,8 +36,13 @@ class DashboardController extends Controller
 
     public function sortByNewest()
     {
-        $datas = Post::with('comments')->orderByDesc('created_at')->paginate(5);
+        $datas = Post::with(['comments' => function ($query) {
+            $query->with('replies')->orderByDesc('created_at'); // Mengambil replies dan mengurutkannya berdasarkan waktu
+        }])
+        ->orderByDesc('created_at')->paginate(5);
 
+
+        // dd($datas);
         return view('pages.dashboard', compact('datas'));
     }
 
