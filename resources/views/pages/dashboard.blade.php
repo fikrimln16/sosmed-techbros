@@ -6,7 +6,7 @@
    
    <!--Post Text Area Start-->
    @auth
-   <h4> Welcome {{ Auth::user()->name }}, Share yours ideas !!</h4>
+   <h4> Welcome {{ Auth::user()->name }}, Share your ideas !!</h4>
    @include('components.textarea-post')
    @else
    <div class="d-flex justify-content-center">
