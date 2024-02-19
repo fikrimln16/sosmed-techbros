@@ -55,6 +55,31 @@
     });
 });
   </script>
+{{-- <script>
+    $(document).ready(function () {
+        $('#followForm').submit(function (e) {
+            e.preventDefault(); // Menghentikan submit form
+            var form = $(this);
+            var url = form.attr('action');
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: form.serialize(), // Mengambil data form
+                success: function (data) {
+                    console.log(data.message);
+                    if (data.message === 'Successfully followed user.') {
+                        $('#followForm').hide(); // Sembunyikan form jika user diikuti
+                        $('p').text('Followed'); // Tampilkan pesan "Followed"
+                    }
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+        });
+    });
+</script> --}}
 {{-- 
 <script>
     $(document).ready(function() {

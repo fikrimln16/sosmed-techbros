@@ -1,7 +1,7 @@
 <div class="card tweet-card">
    <div class="px-3 pt-4 pb-2">
       <div class="d-flex align-items-center justify-content-between">
-         <div class="d-flex align-items-center justify-content-between w-100">
+         <div class="d-flex align-items-start justify-content-between w-100">
             <div class="profile d-flex align-items-center w-100">
                <a href="/profile/{{$data->user->id}}">
                   <img style="width: 50px" class="me-2 avatar-sm rounded-circle  "
@@ -12,11 +12,21 @@
                   </h5>
                </div>
             </div>
-            <div class="w-100 text-end">
+            <div class="w-50 text-end d-flex flex-column">
                <span class="fs-6 fw-light text-muted">
                   <span class="fas fa-clock text-md"> </span>
                   {{ date('Y-m-d H:i:s', strtotime($data->created_at) + (7 * 3600)) }}
                </span>
+                @auth
+                @if(!$data->user->isFollowedBy(auth()->user()->id) && $data->user->id !== auth()->id())
+                    <form id="followForm" action="{{ route('follow', $data->user->id) }}" method="post">
+                        @csrf
+                        <button type='submit' class="btn btn-info btn-sm px-4" id="submit-button">follow</button>
+                    </form>
+                @elseif($data->user->id !== auth()->id())
+                    <p>Followed</p>
+                @endif
+                @endauth
             </div>
          </div>
       </div>

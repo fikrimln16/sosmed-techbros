@@ -17,13 +17,23 @@ class ProfileController extends Controller
                             ->orderBy('created_at', 'desc')
                             ->select('created_at')
                             ->first();
-
+    
+        // Mengambil daftar followers
+        $followers = $profile->followers;
+    
+        // Mengambil daftar following
+        $following = $profile->followings;
+        
+        // dd($followers->count());
         return view('pages.profile', [
             'datas' => $posts,
             'profile' => $profile,
-            'latest_post' => $latest_post
+            'latest_post' => $latest_post,
+            'followers' => $followers,
+            'following' => $following
         ]);
     }
+    
 
     #api
     public function api_profile($id)

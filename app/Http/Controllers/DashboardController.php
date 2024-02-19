@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Follower;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
@@ -36,15 +38,18 @@ class DashboardController extends Controller
 
     public function sortByNewest()
     {
-        $datas = Post::with(['comments' => function ($query) {
-            $query->with('replies')->orderByDesc('created_at'); // Mengambil replies dan mengurutkannya berdasarkan waktu
+        $datas = Post::with(['user', 'comments' => function ($query) {
+            $query->with('user', 'replies')->orderByDesc('created_at'); // Mengambil replies dan mengurutkannya berdasarkan waktu
         }])
-        ->orderByDesc('created_at')->paginate(5);
-
-
+        ->with('user.followers', 'user.followings') // Menyertakan data followers dan following dari user
+        ->orderByDesc('created_at')
+        ->paginate(5);
+    
         // dd($datas);
         return view('pages.dashboard', compact('datas'));
     }
+    
+
 
 
 
@@ -100,9 +105,35 @@ class DashboardController extends Controller
     }
 
 
-    public function show_comments(){
-        
-        return 0;
+    public function follow($id)
+    {
+        $user = User::find($id);
+        $follower = auth()->user(); // Pengguna yang melakukan follow
+    
+        // Periksa apakah pengguna sudah mengikuti pengguna lain
+        if (!$follower->isFollowing($user->id)) {
+            // Lakukan follow
+            $follower->followings()->create([
+                'user_id' => $follower->id,
+                'following_id' => $user->id
+            ]);
+    
+            // Tambahkan pengikut pada pengguna yang diikuti (jika diperlukan)
+            $user->followers()->create([
+                'user_id' => $user->id,
+                'follower_id' => $follower->id
+            ]);
+    
+            return redirect()->route('profile-page', ['id' => $user->id]);
+
+        }
+    
+        return response()->json(['message' => 'User already followed.']);
     }
+    
+
+
+
+    
 
 }

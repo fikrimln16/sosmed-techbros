@@ -55,4 +55,36 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function followers()
+    {
+        return $this->hasMany(Follower::class, 'user_id');
+    }
+
+    public function followings()
+    {
+        return $this->hasMany(Following::class, 'user_id');
+    }
+
+    public function getFollowersAttribute()
+    {
+        return $this->followers()->pluck('follower_id');
+    }
+
+    public function getFollowingsAttribute()
+    {
+        return $this->followings()->pluck('following_id');
+    }
+
+    // Memeriksa apakah user mengikuti user lain
+    public function isFollowing($userId)
+    {
+        return $this->followings->contains($userId);
+    }
+
+    // Memeriksa apakah user diikuti oleh user lain
+    public function isFollowedBy($userId)
+    {
+        return $this->followers->contains($userId);
+    }
 }

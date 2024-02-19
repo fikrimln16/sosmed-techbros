@@ -20,6 +20,7 @@ Route::get('/posts/sort-by-like', [DashboardController::class, 'sortByLike'])->n
 Route::get('/posts/sort-by-newest', [DashboardController::class, 'sortByNewest'])->name('sort-by-newest');
 Route::get('/posts/{post}', [DashboardController::class, 'show'])->name('show-post');
 Route::post('/like/{id}', [DashboardController::class, 'like'])->name('like-post');
+Route::post('/profile/follow/{id}', [DashboardController::class, 'follow'])->name('follow');
 
 #Register Login
 Route::get('/register', [AuthController::class, 'show_register'])->name('register-page');

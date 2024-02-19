@@ -38,7 +38,7 @@
             @endforeach
             @if ($comment->replies->count() > 2)
                   <div class="w-100 d-flex justify-content-center align-items-center">
-                      <a href="{{ route('show-post', $data->id) }}" class="btn btn-primary btn-sm px-4">
+                      <a href="{{ route('show-post', $data->id) }}" class="btn btn-primary btn-sm px-4 mb-2">
                           View all replies...
                       </a>  
                   </div>
